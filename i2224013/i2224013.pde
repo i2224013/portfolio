@@ -1,3 +1,4 @@
+//minimライブラリを追加する必要あり
 import ddf.minim.*;
 import ddf.minim.effects.*;
 import ddf.minim.analysis.*;
@@ -7,10 +8,8 @@ AudioPlayer player;  //サウンドデータ格納用の変数
 LowPassSP lpf;  //ローパスフィルター用の変数
 float cutoff;    //削除する周波数のしきい値
 int waveH;    //波形の高さ
-int currentCircle;
-;  //判定用
-int angle;
-;  //角度の初期値
+int currentCircle;  //判定用
+int angle;  //角度の初期値
 long dragStartTime; // ドラッグを開始した時刻
 int resetDuration; // 初期化までの時間 (ミリ秒)
 int x; //x座標の初期値
