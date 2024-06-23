@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="p5.js"></script>
+  </head>
+  <body>
+    <script>
+      let objX = new Array(500);
+let objY = new Array(500);
+let disX = new Array(500);
+let disY = new Array(500);
+let r = new Array(500);
+let g = new Array(500);
+let delay;
+let x, y;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(0);
+  noStroke();
+  fill(255,255,0);
+  delay = 20.0; // 適切な速度に調整する
+  for (let i = 0; i < 500; i++) {
+    // 初期の円の位置をランダムに設定する
+    objX[i] = random(50, 350);
+    objY[i] = random(50, 350);
+  }
+}
+
+function draw() {
+  background(0);
+
+  for (let i = 0; i < 500; i++) {
+    disX[i] = mouseX - objX[i];
+    disY[i] = mouseY - objY[i];
+    objX[i] = objX[i] + disX[i] / delay;
+    objY[i] = objY[i] + disY[i] / delay;
+
+    if (
+      (objX[i] <= mouseX + 10 &&
+        mouseX - 10 <= objX[i] &&
+        objY[i] <= mouseY + 10 &&
+        mouseY - 10 <= objY[i]) ||
+      10 >= objX[i] ||
+      windowWidth-10 <= objX[i] ||
+      10 > objY[i] ||
+      objY[i] > windowHeight-10
+    ) {
+      if (i <= 125) {
+        r[i] = random(200, 255);
+        g[i] = random(200, 255);
+        objX[i] = random(0, windowWidth/2);
+        objY[i] = random(0, windowHeight/2);
+      } else if (i >= 125 && i <= 249) {
+        r[i] = random(200, 255);
+        g[i] = random(200, 255);
+        objX[i] = random(windowWidth/2, windowWidth);
+        objY[i] = random(0, windowHeight/2);
+      } else if (i >= 250 && i <= 374) {
+        r[i] = random(200, 255);
+        g[i] = random(200, 255);
+        objX[i] = random(0, windowWidth/2);
+        objY[i] = random(windowHeight/2, windowHeight);
+      } else if (i >= 375) {
+        r[i] = random(200, 255);
+        g[i] = random(200, 255);
+        objX[i] = random(windowWidth/2, windowWidth);
+        objY[i] = random(windowHeight/2, windowHeight);
+      }
+    } else {
+      fill(r[i], g[i], 0);
+      stars(objX[i], objY[i], 10, 10);
+    }
+  }
+  function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+function stars(x, y, r) {
+    //頂点の座標、辺の長さ
+    noStroke();
+    triangle(x, y + r, x + r * 1.5, y + r / 2.7, x - r * 1.5, y + r / 2.7);
+    triangle(x, y, x, y + r, x - r * 1.2, y + r * 1.5);
+    triangle(x, y, x, y + r, x + r * 1.2, y + r * 1.5);
+}
+
+}
+
+    </script>
+  </body>
+</html>
